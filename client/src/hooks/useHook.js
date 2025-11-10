@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export function useHook() {
+  const URL = import.meta.env.BACKEND_URL;
+
   const [taskList, setTaskList] = useState([]);
   const [count, setCount] = useState(0);
   const token = localStorage.getItem("token");
@@ -11,7 +13,7 @@ export function useHook() {
 
   const getTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/v1/task/getall", {
+      const res = await axios.get(`${URL}/v1/task/getall`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("📦 Response:", res.data.success);
@@ -30,16 +32,12 @@ export function useHook() {
 
   const addTask = async (newTask) => {
     try {
-      const res = await axios.post(
-        "http://localhost:4000/v1/task/add",
-        newTask,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`${URL}/v1/task/add`, newTask, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (res.success) {
         console.log("Task Added SuccessFully");
         toast.success("Task Added Successfully");
@@ -54,9 +52,7 @@ export function useHook() {
 
   const taskCompleted = async (taskid) => {
     try {
-      const res = await axios.put(
-        `http://localhost:4000/v1/task/iscompleted/${taskid}`
-      );
+      const res = await axios.put(`${URL}/v1/task/iscompleted/${taskid}`);
       if (res.data.success) {
         toast.success("Reload The Page to See Update");
         await getTasks();
@@ -69,10 +65,7 @@ export function useHook() {
 
   const editTask = async (taskid, task) => {
     try {
-      const res = await axios.put(
-        `http://localhost:4000/v1/task/edit/${taskid}`,
-        task
-      );
+      const res = await axios.put(`${URL}/v1/task/edit/${taskid}`, task);
       if (res.data.success) {
         toast.success("Task Updated Successfully");
         await getTasks();
@@ -85,9 +78,7 @@ export function useHook() {
 
   const deleteTask = async (taskid) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:4000/v1/task/delete/${taskid}`
-      );
+      const res = await axios.delete(`${URL}/v1/task/delete/${taskid}`);
       if (res.data.success) {
         toast.success("Task Deleted Successfully");
         await getTasks();
