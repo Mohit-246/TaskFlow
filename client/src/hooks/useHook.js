@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export function useHook() {
-  const URL = import.meta.env.BACKEND_URL;
+  const URL = import.meta.env.VITE_BACKEND_URL;
 
   const [taskList, setTaskList] = useState([]);
   const [count, setCount] = useState(0);
