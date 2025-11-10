@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useEffect } from "react";
 
 export function useUserHook() {
-  const URL = import.meta.env.BACKEND_URL;
+  const URL = import.meta.env.VITE_BACKEND_URL;
   
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [user, setUser] = useState([]);
