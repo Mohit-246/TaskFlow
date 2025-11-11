@@ -18,7 +18,7 @@ export const addTask = async (req, res) => {
       priority: priority || "Low",
       dueDate: dueDate || null,
       isCompleted: isCompleted || false,
-      author:req.user._id,
+      author: req.userId,
     });
 
     await newtask.save();
@@ -38,7 +38,8 @@ export const addTask = async (req, res) => {
 };
 export const getTask = async (req, res) => {
   try {
-    const tasks = await Task.find().sort({ createdAt: -1 });
+    const userId = req.user_Id;
+    const tasks = await Task.find({ author: userId }).sort({ createdAt: -1 });
     if (!tasks || tasks.length === 0) {
       return res.status(201).json({
         success: false,

@@ -11,12 +11,13 @@ export function useHook() {
 
   const [filter, setFilter] = useState("All");
 
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+
   const getTasks = async () => {
     try {
       const res = await axios.get(`${URL}/v1/task/getall`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("📦 Response:", res.data.success);
       if (res.data.success) {
         setTaskList(res.data.taskList || []);
         setCount(res.data.count || 0);
@@ -32,7 +33,13 @@ export function useHook() {
 
   const addTask = async (newTask) => {
     try {
-      const res = await axios.post(`${URL}/v1/task/add`, newTask, {
+      if (!newTask) {
+        toast.error("Add The Task first...");
+      }
+
+      const userTask = { ...newTask, userId: user._id };
+
+      const res = await axios.post(`${URL}/v1/task/add`, userTask, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
