@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import User from "./user.js";
 
 const taskSchema = new mongoose.Schema({
-  author: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
   priority: { type: String, required: true },
