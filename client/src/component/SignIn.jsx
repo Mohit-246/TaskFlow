@@ -44,9 +44,9 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="flex flex-col h-screen w-full items-center justify-center bg-linear-to-br from-sky-200 to-sky-400">
+      <div className="flex -z-50 flex-col h-screen w-full items-center justify-center bg-linear-to-br from-sky-200 to-sky-400">
         {islogin ? (
-          <div className="flex text-center max-w-min items-center justify-center bg-sky-100 shadow-md py-6 -z-50 rounded-4xl">
+          <div className="flex text-center max-w-min items-center justify-center bg-sky-100 shadow-md py-6  rounded-4xl">
             <div className="p-2 space-y-6">
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold font1">Login</h1>
@@ -121,7 +121,7 @@ export default function SignIn() {
           </div>
         ) : (
           <>
-            <div className="flex text-center max-w-min items-center justify-center bg-sky-100 shadow-md py-6 -z-50 rounded-4xl">
+            <div className="flex text-center max-w-min items-center justify-center bg-sky-100 shadow-md py-6 rounded-4xl">
               <div className="p-2 space-y-6">
                 <div className="space-y-2">
                   <h1 className="text-4xl font-bold font1">Signup</h1>
