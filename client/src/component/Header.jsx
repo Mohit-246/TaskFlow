@@ -9,7 +9,7 @@ export default function Header() {
   const { isLoggedIn } = useContext(AuthContext);
   return (
     <>
-      <div className="flex px-6 items-center justify-between shadow-md">
+      <div className="flex px-6 z-50 items-center justify-between shadow-md">
         <div className="flex items-center">
           <Goal size={50} className="text-sky-500 font-bold" />
           <div className=" block p-4">
